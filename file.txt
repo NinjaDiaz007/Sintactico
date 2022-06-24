@@ -1,0 +1,17 @@
+namesplace Program[
+	usl java;
+	class Variable [
+		static void main(String{} args)[
+			string ht;
+			console..print(hola);
+			print(hola);
+			Random ran = new Random();
+
+			if(ly == ty)[console..print(ly);];
+
+			<div class=hero>Hola</div>
+			<h2></h2>
+			<img></img>
+		];
+	]
+]

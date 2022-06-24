@@ -1,0 +1,272 @@
+PARSER_BEGIN(index)
+
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+class index{
+	public static List<String> listaA = new ArrayList<String>();
+
+	public static void Contador(String campo){
+		int u = index.listaA.indexOf(campo);
+
+		if(u == -1){
+			index.listaA.add(campo);
+			u = index.listaA.indexOf(campo);
+			System.out.print(u);
+		}
+		else{
+			System.out.print(u);
+		}
+	}
+
+	public static void main(String[] args) throws ParseException{
+		try{
+			index i = new index(System.in);
+			i.Principal();
+			System.out.print("\nSe compilo con exito\n");
+		}
+		catch(ParseException e){
+			System.out.print("\n"+e.getMessage()+"\n");
+			System.out.print("\nSe han encontrado errores\n");
+		}
+	}
+}
+PARSER_END(index)
+
+// Los espacios en blanco
+SKIP:{" "|"\n"|"\t"|"\n\r"|"\r"}
+
+//Comentarios
+SKIP:{<Comentarios: ("/*" (~[])* "*/")|("//"(~["\n"])*"\n")>}
+
+//Defeniciones regulares
+TOKEN:{<#Mani_D_Ma: "DELETE"|"UPDATE"|"INSERT"|"SELECT"|"TRUNCATE"|"DROP"|"USER"|"LOGIN" |"FUNCION"|"DESC">}
+TOKEN:{<#Mani_D_Mi: "delete"|"update"|"insert"|"select"|"truncate"|"drop"|"user"|"login"|"funcion"|"desc">}
+TOKEN:{<#Va_Dinamic: "DECLARE"|"WHERE">}
+TOKEN:{<#Va_Dinami: "declare"|"where">}
+
+//Se usan mas de 5 lenguajes
+TOKEN:{<PREGUNTA: "if"|"switch">}
+TOKEN:{<TIPODATOS: "int"|"double"|"string"|"let"|"var"|"const"|"decimal"|"byte"|"boolean"|"float"|"bool"|"nchar"|"varchar"|"char"|"smalldatetime"|"SmallInt"|"real"|"money"|"Datetime">}
+TOKEN:{<OPEARIT: "+"|"-"|"/"|"*"|"%"|"^"|"**"|"??="|"/="|"%="|"**="|"-="|"*="|"//=">}
+TOKEN:{<SP: "?">}
+TOKEN:{<OPEREL: "<"|">"|"<="|">="|"=="|"!="|"!=="|"==="|"instanceof">}
+TOKEN:{<OPRLOG: "||"|"&&">}
+TOKEN:{<ALEATORIO: "random">}
+TOKEN:{<NULO: "null">}
+TOKEN:{<CLASES: "class">}
+TOKEN:{<INTERFACES: "interface">}
+TOKEN:{<VIRTUAL: "virtual">}
+TOKEN:{<BOLEANOS: "true"|"false">}
+TOKEN:{<EDITAR: "get"|"getElementById">}
+TOKEN:{<ESCRIBIR: "set">}
+TOKEN:{<Mientras: "while">}
+TOKEN:{<CICLOS: "white"|"do"|"for"|"foreach">}
+TOKEN:{<Asignacion: "=">}
+TOKEN:{<Gato: "#">}
+TOKEN:{<Coma: ",">}
+TOKEN:{<MODIFICADOR: "static"|"public"|"private"|"protected">}
+TOKEN:{<INCREMENTO: "++">}
+TOKEN:{<DECREMENTO: "--">}
+TOKEN:{<CONSOLA: "Console"|"console">}
+TOKEN:{<EXCEPCIONES: "Exception">}
+TOKEN:{<CONTRUCTORES: "new">}
+TOKEN:{<FUNCION: "function"|"void"|"=>">}
+TOKEN:{<FINALIZACION: ";"|"break">}
+TOKEN:{<RETORNO: "return">}
+TOKEN:{<REFERENCIA: "this">}
+TOKEN:{<ABSTRACTO: "abstract">}
+TOKEN:{<OPERCADENA: "typeof">}
+TOKEN:{<Punto: "..">}
+TOKEN:{<CONSECUENCIAS: "case"|"else"|"default">}
+
+//Se usan menos de 5
+TOKEN:{<IMPRIMIR: "print"|"Write"|"WriteLine"|"innerText"|"innerHTML">}
+TOKEN:{<IMPORTAR: "import">}
+TOKEN:{<EXPORTAR: "export">}
+TOKEN:{<ARREGLO: "array"|"Array.from">}
+TOKEN:{<SUSPENDER: "suspend"|"join"|"sleep">}
+TOKEN:{<HERENCIA: "extends"|":"|"implements">}
+TOKEN:{<Usl: "usl">}
+
+//C#
+TOKEN:{<CONVERTIDOR: "Convert"|"Parse"|"parseint"|"parsefloat">}
+TOKEN:{<IN_GRAFICA: "forms">}
+TOKEN:{<LISTA: "List">}
+TOKEN:{<CALCULO: "Mach"|"calc">}
+TOKEN:{<RESUMEN_HILOS: "resume">}
+TOKEN:{<FINALIZAR_HILOS: "stop">}
+TOKEN:{<INICIAR_HILOS: "start">}
+TOKEN:{<EJECUTAR_HILOS: "run">}
+TOKEN:{<Namesplace: "namesplace">}
+TOKEN:{<DESPLAZAMIENTO_BINARIO: "<<"|">>"|">>>"|"~"|"&="|"|="|"^=">}
+TOKEN:{<ENTRADA_DATO: "ReadLine"|"ReadKey">}
+
+//HTML
+TOKEN:{<ESTILOS: "style">}
+TOKEN:{<DIRECCION: "href">}
+TOKEN:{<Etiqueta: "h2"|"div"|"br"|"img"|"input">}
+TOKEN:{<EtiCierre: "</div>"|"</h2>"|"</img>">}
+
+ //CSS
+TOKEN:{<FIJO: "fixed">}
+TOKEN:{<POSICION: "position">}
+TOKEN:{<ANCHO: "width">}
+TOKEN:{<LARGO: "height">}
+TOKEN:{<TIPO: "type">}
+TOKEN:{<BORDE: "borde">}
+
+//Javascript
+TOKEN:{<DOCUMENTO: "document">}
+TOKEN:{<VALUACION: "value">}
+TOKEN:{<LISTADO_CLASES: "classList">}
+TOKEN:{<ELEMENTOS: "lenght"|"updateName">}
+TOKEN:{<MEESTATIC: "max">}
+TOKEN:{<SELECTOR_JAVASCRIPT: "querySelector"|"querySelectorAl">}
+TOKEN:{<EXTENCION_JAVASCRIPT: "yield"|"next"|"async"|"src">}
+TOKEN:{<Time: "time">}
+TOKEN:{<OBJETOS_JAVASCRIPT: "WeakMap"|"symbol"|"getmonth"|"getyear"|"getminutes"|"getseconds"|"gethours"|"undefined"|"map"|"Number"|"Weakset"|"Object">}
+
+//MYSQL
+TOKEN:{<MANIPULACION_DATOS: <Mani_D_Mi>|<Mani_D_Ma>>}
+TOKEN:{<CREAR_TABLAS: "CREATE"|"create">}
+TOKEN:{<CLAUSULAS: "IN"|"in">}
+TOKEN:{<MODIFICAR_TABLAS: "ALTER"|"alter">}
+TOKEN:{<LLAVEPRIMARIA: "primary key"|"PRIMARY KEY">}
+TOKEN:{<VARIABLEDINA: <Va_Dinami>|<Va_Dinamic>>}
+
+//Parenteisis, llaves y corchetes
+TOKEN: {<LP: "(">}
+TOKEN:{<RP: ")">}
+TOKEN:{<LC: "[">}
+TOKEN:{<RC: "]">}
+TOKEN:{<LL: "{">}
+TOKEN:{<RL: "}">}
+
+// Numericos
+TOKEN:{<Numerico: (["0"-"9"])+>}
+
+//Identificadores
+TOKEN:{<MainInicial: "main(String{} args)">}
+TOKEN:{<Id: ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9","_"])+>}
+
+//El programa principal
+void Principal():{}
+{
+	<Namesplace><Id><LC>(Librerias()|Variable()|Clases()|Funciones())*<RC>
+}
+
+void Librerias():{}
+{
+	<Usl><Id><FINALIZACION>
+}
+
+void Clases():{}
+{
+	<CLASES><Id><LC>Main()|Bloque()<RC>
+}
+
+//Declaracion de los bloques
+void Bloque():{}
+{
+	<LC>(Variable()|Ciclos()|NumeroAleatorio()|MetodoIF()|Contructores()|Consola()|Funciones()|Etiquetas())*<RC><FINALIZACION>
+}
+
+//Declaracion de variables
+void Variable():{}
+{
+	<TIPODATOS><Id>(Vls())*<FINALIZACION>
+}
+void Vls():{}
+{
+	<Asignacion><Id>|<Numerico>
+}
+
+// Asignar valor a las variables ya creadas
+void AsignarVariable():{}
+{
+	<Id><Asignacion>Texto()<FINALIZACION>
+}
+
+//Declaracion de Contructores
+void NumeroAleatorio():{}
+{
+	<ALEATORIO><Id><OPEARIT><CONTRUCTORES><ALEATORIO><LP>(<Id>)*<RP>
+}
+void Contructores():{}
+{
+	<Id><Id><Asignacion><CONTRUCTORES><Id><LP>(<Id>)*<RP><FINALIZACION>
+}
+
+//Main
+void Main():{}
+{
+	<MODIFICADOR><FUNCION><MainInicial>Bloque()
+}
+
+//Metodos
+void MetodoFor():{}
+{
+	<LP><Id><Asignacion><Id>|<Numerico><HERENCIA><Id><INCREMENTO><HERENCIA>Condicion()<HERENCIA><RP>Bloque()
+}
+
+//Ciclos
+void Ciclos():{}
+{
+	CicloFor()|CicloWhile()
+}
+void CicloFor():{}
+{
+	<CICLOS>MetodoFor()<FINALIZACION>
+}
+void CicloWhile():{}
+{
+	<Mientras>Bloque()<CICLOS>Condicion()
+}
+
+//IF
+void MetodoIF():{}
+{
+	<PREGUNTA><LP>Condicion()<RP>Bloque()
+}
+
+// Compara valores
+void Condicion():{}
+{
+	<Id><OPEREL><Id>|<Numerico>
+}
+
+//Funciones
+void Funciones():{}
+{
+	<FUNCION><Id><LC>Bloque()<RC>
+}
+
+// Imprimir datos en la consola
+void Consola():{}
+{
+	ConsolaImprime()|Imprimir()
+}
+void ConsolaImprime():{}
+{
+	<CONSOLA><Punto><IMPRIMIR><LP>Texto()<RP><FINALIZACION>
+}
+
+//Inprecion de informacion
+void Imprimir():{}
+{
+	<IMPRIMIR><LP>Texto()<RP><FINALIZACION>
+}
+
+// Mostrar Texto
+void Texto():{}
+{
+	(<Id>|<Numerico>)*
+}
+
+// Etiquetas
+void Etiquetas():{}
+{
+	<OPEREL><Etiqueta>(<CLASES><Asignacion><Id>)*<OPEREL>Texto()<EtiCierre>
+}
